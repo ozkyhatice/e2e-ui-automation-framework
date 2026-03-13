@@ -16,6 +16,9 @@ public class TextBoxPage extends BasePage {
     private By permanentAddress = By.id("permanentAddress");
     private By submitBtn = By.id("submit");
     private By outputName = By.id("name");
+    private By outputMail = By.id("email");
+    private By outputCurr = By.id("currentAddress");
+    private By outputPerm = By.id("permanentAddress");
 
     public void openPage() {
         driver.get(ConfigReader.getFullUrl(path));
@@ -34,5 +37,14 @@ public class TextBoxPage extends BasePage {
 
     public String getOutputName() {
         return getText(outputName);
+    }
+    public String getOutputEmail() {
+        return getText(outputMail);
+    }
+    public String getOutputCurrentAddress() {
+        return getText(outputCurr);
+    }
+    public String getOutputPermanentAddress() {
+        return getText(outputPerm);
     }
 }

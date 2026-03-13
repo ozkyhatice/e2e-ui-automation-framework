@@ -20,22 +20,30 @@ public class BasePage {
     }
 
     protected void type(By locator, String text) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator))
-            .sendKeys(text);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        try {
+            ((org.openqa.selenium.JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", element);
+            element.clear();
+            element.sendKeys(text);
+        } catch (Exception e) {
+            ((org.openqa.selenium.JavascriptExecutor) driver)
+                .executeScript("arguments[0].value = arguments[1];", element, text);
+        }
     }
 
     protected void click(By locator) {
-    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
-    
-    try {
-        ((org.openqa.selenium.JavascriptExecutor) driver)
-            .executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", element);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
         
-        element.click();
-    } catch (Exception e) {
-        ((org.openqa.selenium.JavascriptExecutor) driver)
-            .executeScript("arguments[0].click();", element);
-    }
+        try {
+            ((org.openqa.selenium.JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", element);
+            
+            element.click();
+        } catch (Exception e) {
+            ((org.openqa.selenium.JavascriptExecutor) driver)
+                .executeScript("arguments[0].click();", element);
+        }
 }
 
     protected String getText(By locator) {

@@ -2,8 +2,12 @@ package com.example.pages;
 
 import com.example.base.BasePage;
 import com.example.config.ConfigReader;
+
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 
 public class CheckBoxPage extends BasePage {
@@ -53,56 +57,11 @@ public class CheckBoxPage extends BasePage {
     public void openPage() {
         driver.get(ConfigReader.getFullUrl(path));
     }
-    public void clickHome() {
-        click(BoxHome);
+    public void clickCheckbox(String label) {
+        By checkbox = By.cssSelector("span.rc-tree-checkbox[aria-label='Select " + label + "']");
+        click(checkbox);
     }
-    public void clickDesktop() {
-        click(BoxDesktop);
-    }
-    public void clickNotes() {
-        click(BoxNotes);
-    }
-    public void clickCommands() {
-        click(BoxCommands);
-    }
-    public void clickDocuments() {
-        click(BoxDocuments);
-    }
-    public void clickWorkspace() {
-        click(BoxWorkspace);
-    }
-    public void clickReact() {
-        click(BoxReact);
-    }
-    public void clickAngular() {
-        click(BoxAngular);
-    }
-    public void clickVeu() {
-        click(BoxVeu);}
-    public void clickOffice() {
-        click(BoxOffice);
-    }
-    public void clickPublic() {
-        click(BoxPublic);
-    }
-    public void clickPrivate() {
-        click(BoxPrivate);
-    }
-    public void clickClassified() {
-        click(BoxClassified);
-    }
-    public void clickGeneral() {
-        click(BoxGeneral);
-    }
-    public void clickDownloads() {
-        click(BoxDownloads);
-    }
-    public void clickWordFile() {
-        click(BoxWordFile);
-    }
-    public void clickExcelFile() {
-        click(BoxExcelFile);
-    }
+
     public boolean isCheckboxSelected(String label) {
         By checkbox = By.cssSelector("span.rc-tree-checkbox[aria-label='Select " + label + "']");
         return driver.findElement(checkbox).getAttribute("aria-checked").equals("true");
@@ -110,6 +69,20 @@ public class CheckBoxPage extends BasePage {
 
     public String getOutputText() {
         return driver.findElement(output).getText();
+    }
+    public boolean areAllChildrenSelected(String parentLabel) {
+        By childrenLocator = By.xpath(
+            "//span[@title='" + parentLabel + "']/ancestor::div[contains(@class,'rc-tree-treenode')]//span[contains(@class,'rc-tree-checkbox')]"
+        );
+
+        List<WebElement> children = driver.findElements(childrenLocator);
+
+        for (WebElement child : children) {
+            if (!child.getAttribute("aria-checked").equals("true")) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

@@ -4,14 +4,19 @@ import org.testng.asserts.SoftAssert;
 import org.testng.annotations.Test;
 public class CheckBoxTest extends BaseTest{
     @Test
-    public void HomeCheckBoxTest() {
+    public void homeCheckBoxTest() {
         SoftAssert softAssert = new SoftAssert();
         CheckBoxPage page = new CheckBoxPage(driver);
 
         page.openPage();
-        page.clickHome();
-        softAssert.assertTrue(page.getOutputText().contains("home"));
+
+        page.clickCheckbox("Home");
+
+        softAssert.assertTrue(page.areAllChildrenSelected("Home"), "Checkbox wasn't selected correctly");
+        System.out.println(page.getOutputText());
+
         softAssert.assertAll();
     }
+    
     
 }

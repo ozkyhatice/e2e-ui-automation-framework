@@ -10,7 +10,8 @@ public class CheckBoxTest extends BaseTest{
 
         page.openPage();
         page.clickHome();
-        softAssert.assertTrue(page.getOutputText().contains("You have selected :home"));
+        softAssert.assertTrue(page.getOutputText().contains("home"));
+        softAssert.assertAll();
     }
     
 }

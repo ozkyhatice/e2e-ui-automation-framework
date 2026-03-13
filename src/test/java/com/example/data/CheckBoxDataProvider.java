@@ -8,7 +8,7 @@ public class CheckBoxDataProvider {
         return new Object[][]{
                 {"Home", false},
                 {"Desktop", true},
-                {"Documents", true}
+                {"Documents", true},
                 {"Downloads", true}
         };
     }

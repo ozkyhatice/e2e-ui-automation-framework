@@ -2,21 +2,29 @@ package com.example.tests;
 import com.example.pages.CheckBoxPage;
 import org.testng.asserts.SoftAssert;
 import org.testng.annotations.Test;
+import com.example.data.CheckBoxDataProvider;
 public class CheckBoxTest extends BaseTest{
-    @Test
-    public void homeCheckBoxTest() {
+    @Test(dataProvider = "checkboxData", dataProviderClass = CheckBoxDataProvider.class)
+    public void checkboxSelectionTest(String label, boolean needsExpand) {
+
         SoftAssert softAssert = new SoftAssert();
         CheckBoxPage page = new CheckBoxPage(driver);
 
         page.openPage();
 
-        page.clickCheckbox("Home");
+        if (needsExpand) {
+            page.expandNode("Home");
+        }
 
-        softAssert.assertTrue(page.areAllChildrenSelected("Home"), "Checkbox wasn't selected correctly");
+        page.clickCheckbox(label);
+
+        softAssert.assertTrue(
+                page.areAllChildrenSelected(label),
+                label + " checkbox wasn't selected correctly"
+        );
+
         System.out.println(page.getOutputText());
 
         softAssert.assertAll();
     }
-    
-    
 }

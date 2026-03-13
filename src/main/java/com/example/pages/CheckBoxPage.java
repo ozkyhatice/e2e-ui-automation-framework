@@ -84,5 +84,19 @@ public class CheckBoxPage extends BasePage {
         }
         return true;
     }
+    public void expandNode(String label) {
+
+        By switcher = By.xpath(
+            "//span[@title='" + label + "']/preceding-sibling::span[contains(@class,'rc-tree-switcher')]"
+        );
+
+        WebElement element = driver.findElement(switcher);
+
+        String classes = element.getAttribute("class");
+
+        if (classes.contains("close")) {
+            element.click();
+        }
+    }
 
 }

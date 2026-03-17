@@ -51,4 +51,5 @@ public class BasePage {
             ExpectedConditions.visibilityOfElementLocated(locator))
             .getText();
     }
+    
 }

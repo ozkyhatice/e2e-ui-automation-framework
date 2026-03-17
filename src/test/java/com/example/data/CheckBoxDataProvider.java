@@ -21,7 +21,7 @@ public class CheckBoxDataProvider {
                 {"Documents", "WorkSpace"},
                 {"Documents", "React"},
                 {"Documents", "Angular"},
-                {"Documents", "Veu"},
+                {"Documents", "Vue"},
                 {"Documents", "Office"},
                 {"Documents", "Public"},
                 {"Documents", "Private"},

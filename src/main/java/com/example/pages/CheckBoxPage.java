@@ -8,6 +8,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class CheckBoxPage extends BasePage {
@@ -63,6 +64,7 @@ public class CheckBoxPage extends BasePage {
 
         if (classes.contains("close")) {
             element.click();
+            wait.until(ExpectedConditions.attributeContains(switcher, "class", "open"));
         }
     }
 

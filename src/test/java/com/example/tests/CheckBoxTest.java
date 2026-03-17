@@ -27,4 +27,26 @@ public class CheckBoxTest extends BaseTest{
 
         softAssert.assertAll();
     }
+    @Test(dataProvider = "childCheckboxData", dataProviderClass = CheckBoxDataProvider.class)
+    public void childCheckboxTest(String parent, String child) {
+        SoftAssert softAssert = new SoftAssert();
+        CheckBoxPage page = new CheckBoxPage(driver);
+
+        page.openPage();
+        
+        page.expandNode("Home");
+        page.expandNode(parent);
+
+        page.clickCheckbox(child);
+
+        softAssert.assertTrue(
+                page.isCheckboxSelected(child),
+                child + " checkbox wasn't selected correctly"
+        );
+
+        System.out.println(page.getOutputText());
+
+        softAssert.assertAll();
+    }
+
 }

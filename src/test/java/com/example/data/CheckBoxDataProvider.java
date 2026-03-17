@@ -12,4 +12,23 @@ public class CheckBoxDataProvider {
                 {"Downloads", true}
         };
     }
+
+    @DataProvider(name = "childCheckboxData")
+    public Object[][] childCheckboxData() {
+        return new Object[][]{
+                {"Desktop", "Notes"},
+                {"Desktop", "Commands"},
+                {"Documents", "WorkSpace"},
+                {"Documents", "React"},
+                {"Documents", "Angular"},
+                {"Documents", "Veu"},
+                {"Documents", "Office"},
+                {"Documents", "Public"},
+                {"Documents", "Private"},
+                {"Documents", "Classified"},
+                {"Documents", "General"},
+                {"Downloads", "Word File.doc"},
+                {"Downloads", "Excel File.doc"}
+        };
+    }
 }

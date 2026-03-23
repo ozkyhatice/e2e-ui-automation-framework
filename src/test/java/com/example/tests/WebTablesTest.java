@@ -44,7 +44,7 @@ public class WebTablesTest extends BaseTest {
         page.deleteRecordById(1);
         int newRowCount = page.getTableRowCount();
         boolean isDeleted = driver.findElements(By.id("delete-record-1")).isEmpty();
-        softAssert.assertTrue(isDeleted, "Kayıt silindikten sonra butonu hala DOM'da mevcut!");
+        softAssert.assertTrue(isDeleted, "Record with ID 1 was not deleted");
         softAssert.assertEquals(newRowCount, initialRowCount - 1, "Row count did not decrease by 1");
         softAssert.assertAll();
     }

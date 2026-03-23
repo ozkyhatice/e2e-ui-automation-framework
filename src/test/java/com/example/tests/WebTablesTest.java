@@ -3,6 +3,9 @@ import org.testng.annotations.Test;
 import com.example.pages.WebTablesPage;
 import com.example.data.WebTablesDataProvider;
 import org.testng.asserts.SoftAssert;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
 
 public class WebTablesTest extends BaseTest {
@@ -15,6 +18,9 @@ public class WebTablesTest extends BaseTest {
         page.submitForm();
 
         SoftAssert softAssert = new SoftAssert();
+        //wait until the new record appears in the table
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until((ExpectedCondition<Boolean>) d -> page.isUserInTable(email));
         softAssert.assertTrue(page.isUserInTable(firstName), "First name not found in table");
         softAssert.assertTrue(page.isUserInTable(lastName), "Last name not found in table");
         softAssert.assertTrue(page.isUserInTable(email), "Email not found in table");

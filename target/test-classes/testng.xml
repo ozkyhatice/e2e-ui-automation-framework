@@ -3,6 +3,7 @@
     <test name="TextBox Test">
         <classes>
             <class name="com.example.tests.TextBoxTest"/>
+            <class name="com.example.tests.CheckBoxTest"/>
         </classes>
     </test>
 </suite>

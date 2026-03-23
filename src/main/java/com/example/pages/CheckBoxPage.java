@@ -28,8 +28,8 @@ public class CheckBoxPage extends BasePage {
         driver.get(ConfigReader.getFullUrl(path));
     }
     public void scrollIntoView(WebElement element) {
-    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
-}
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+    }
     public void clickCheckbox(String label) {
         By checkbox = By.cssSelector("span.rc-tree-checkbox[aria-label='Select " + label + "']");
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(checkbox));
@@ -60,20 +60,19 @@ public class CheckBoxPage extends BasePage {
         return true;
     }
     public void expandNode(String label) {
-    By switcherLocator = By.xpath("//span[@title='" + label + "']/preceding-sibling::span[contains(@class,'rc-tree-switcher')]");
-    
-    WebElement switcher = wait.until(ExpectedConditions.presenceOfElementLocated(switcherLocator));
-    scrollIntoView(switcher);
+        By switcherLocator = By.xpath("//span[@title='" + label + "']/preceding-sibling::span[contains(@class,'rc-tree-switcher')]");
+        
+        WebElement switcher = wait.until(ExpectedConditions.presenceOfElementLocated(switcherLocator));
+        scrollIntoView(switcher);
 
-    if (switcher.getAttribute("class").contains("close")) {
-        switcher.click();
-        try {
-            // Sadece 2-3 saniye bekle, eğer open olmazsa bile devam et
-            new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.attributeContains(switcherLocator, "class", "open"));
-        } catch (Exception e) {
-            System.out.println(label + " düğümü için 'open' class'ı beklenirken zaman aşımı oldu, devam ediliyor...");
+        if (switcher.getAttribute("class").contains("close")) {
+            switcher.click();
+            try {
+                new WebDriverWait(driver, Duration.ofSeconds(3))
+                    .until(ExpectedConditions.attributeContains(switcherLocator, "class", "open"));
+            } catch (Exception e) {
+                System.out.println(label + " node couldn't be expanded.");
+            }
         }
     }
-}
 }

@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.example.config.ConfigReader;
+
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -46,6 +48,15 @@ public class WebTablesPage extends BasePage {
     return driver.findElements(By.xpath("//table/tbody/tr"))
             .stream()
             .anyMatch(row -> row.getText().contains(value));
+    }
+    public int getTableRowCount() {
+        return driver.findElements(By.xpath("//table/tbody/tr")).size();
+    }
+
+    public void deleteRecordById(int recordId) {
+        By deleteBtn = By.id("delete-record-" + recordId);
+        click(deleteBtn);
 }
+    
 
 }

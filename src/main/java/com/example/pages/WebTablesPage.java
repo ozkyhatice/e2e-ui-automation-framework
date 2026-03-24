@@ -32,7 +32,7 @@ public class WebTablesPage extends BasePage {
         driver.findElement(By.id("firstName")).sendKeys(firstName);
         driver.findElement(By.id("lastName")).sendKeys(lastName);
         
-        // driver.findElement(By.id("userEmail")).sendKeys(email);
+        driver.findElement(By.id("userEmail")).sendKeys(email);
         driver.findElement(By.id("age")).sendKeys(age);
         driver.findElement(By.id("salary")).sendKeys(salary);
         driver.findElement(By.id("department")).sendKeys(department);

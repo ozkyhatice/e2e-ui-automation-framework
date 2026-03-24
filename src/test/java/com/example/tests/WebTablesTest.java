@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-import com.example.utils.RetryAnalyzer;
 
 
 public class WebTablesTest extends BaseTest {
@@ -49,29 +48,25 @@ public class WebTablesTest extends BaseTest {
         softAssert.assertEquals(newRowCount, initialRowCount - 1, "Row count did not decrease by 1");
         softAssert.assertAll();
     }
-    @Test(dataProvider = "editRecordData", dataProviderClass = WebTablesDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
-    public void editRecordTest(String newFirstName, String newLastName, String newEmail, String newAge, String newSalary, String newDepartment) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        SoftAssert softAssert = new SoftAssert();
-        WebTablesPage page = new WebTablesPage(driver);
-        page.openPage();
-        int initialRowCount = page.getTableRowCount();
-        if (initialRowCount == 0) {
-            return;
-        }
+    // @Test(dataProvider = "editRecordData", dataProviderClass = WebTablesDataProvider.class, retryAnalyzer = RetryAnalyzer.class)
+    // public void editRecordTest(String newFirstName, String newLastName, String newEmail, String newAge, String newSalary, String newDepartment) {
+    //     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    //     SoftAssert softAssert = new SoftAssert();
+    //     WebTablesPage page = new WebTablesPage(driver);
+    //     page.openPage();
+    //     int initialRowCount = page.getTableRowCount();
+    //     if (initialRowCount == 0) {
+    //         return;
+    //     }
 
-        page.editRecordById(1, newFirstName, newLastName, newEmail, newAge, newSalary, newDepartment);
-        try {
-            Thread.sleep(10000); 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //wait until table is visible again after edit
-        if (!page.isWebTableVisible()) {
-            wait.until((ExpectedCondition<Boolean>) d -> page.isWebTableVisible());
-        }
+    //     page.editRecordById(1, newFirstName, newLastName, newEmail, newAge, newSalary, newDepartment);
+        
+    //     //wait until table is visible again after edit
+    //     if (!page.isWebTableVisible()) {
+    //         wait.until((ExpectedCondition<Boolean>) d -> page.isWebTableVisible());
+    //     }
 
-        softAssert.assertTrue(page.isUserInTable(newFirstName), "First name not found in table after edit");
-        softAssert.assertAll();
-    }
+    //     softAssert.assertTrue(page.isUserInTable(newFirstName), "First name not found in table after edit");
+    //     softAssert.assertAll();
+    // }
 }

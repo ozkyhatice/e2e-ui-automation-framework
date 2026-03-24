@@ -7,4 +7,10 @@ public class WebTablesDataProvider {
             {"Test User", "Test LastName", "test@email.com", "25", "50000", "Test Department"}
         };
     }
+    @DataProvider(name = "editRecordData")
+    public static Object[][] editRecordData() {
+        return new Object[][]{
+            {"EditedFirstName", "EditedLastName", "edited@email.com", "30", "60000", "Edited Department"}
+        };
+    }
 }

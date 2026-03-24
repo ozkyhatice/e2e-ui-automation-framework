@@ -9,7 +9,6 @@ import com.example.config.ConfigReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import org.openqa.selenium.JavascriptExecutor;
 
 public class WebTablesPage extends BasePage {
     private WebDriver driver;
@@ -33,7 +32,7 @@ public class WebTablesPage extends BasePage {
         driver.findElement(By.id("firstName")).sendKeys(firstName);
         driver.findElement(By.id("lastName")).sendKeys(lastName);
         
-        driver.findElement(By.id("userEmail")).sendKeys(email);
+        // driver.findElement(By.id("userEmail")).sendKeys(email);
         driver.findElement(By.id("age")).sendKeys(age);
         driver.findElement(By.id("salary")).sendKeys(salary);
         driver.findElement(By.id("department")).sendKeys(department);
@@ -49,8 +48,9 @@ public class WebTablesPage extends BasePage {
         firstName.clear();
         lastName.clear();
         userEmail.click();
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].value = '';", userEmail);
+userEmail.click();
+    userEmail.sendKeys(org.openqa.selenium.Keys.CONTROL + "a");
+    userEmail.sendKeys(org.openqa.selenium.Keys.BACK_SPACE);
         age.clear();
         salary.clear();
         department.clear();

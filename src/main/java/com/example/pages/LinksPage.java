@@ -12,6 +12,13 @@ public class LinksPage extends BasePage {
 
     private By homeLink = By.id("simpleLink");
     private By homeDynamicLink = By.id("dynamicLink");
+    private By createdLink = By.id("created");
+    private By noContentLink = By.id("no-content");
+    private By movedLink = By.id("moved");
+    private By badRequestLink = By.id("bad-request");
+    private By unauthorizedLink = By.id("unauthorized");
+    private By forbiddenLink = By.id("forbidden");
+    private By notFoundLink = By.id("invalid-url");
     public LinksPage(WebDriver driver) {
         super();
         this.driver = super.driver;
@@ -47,5 +54,38 @@ public class LinksPage extends BasePage {
     public WebElement getHomeDynamicLink() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(homeDynamicLink));
         return driver.findElement(homeDynamicLink);
+    }
+    public WebElement getCreatedLink() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(createdLink));
+        return driver.findElement(createdLink);
+    }
+    public WebElement getNoContentLink() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(noContentLink));
+        return driver.findElement(noContentLink);
+    }
+    public WebElement getMovedLink() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(movedLink));
+        return driver.findElement(movedLink);
+    }
+    public WebElement getBadRequestLink() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(badRequestLink));
+        return driver.findElement(badRequestLink);
+    }
+    public WebElement getUnauthorizedLink() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(unauthorizedLink));
+        return driver.findElement(unauthorizedLink);
+    }
+    public WebElement getForbiddenLink() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(forbiddenLink));
+        return driver.findElement(forbiddenLink);
+    }
+    public WebElement getNotFoundLink() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notFoundLink));
+        return driver.findElement(notFoundLink);
+    }
+    public String getResponseText() {
+        By responseLocator = By.id("linkResponse");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(responseLocator));
+        return driver.findElement(responseLocator).getText();
     }
 }

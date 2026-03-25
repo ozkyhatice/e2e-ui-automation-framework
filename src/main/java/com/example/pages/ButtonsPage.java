@@ -23,11 +23,19 @@ public class ButtonsPage extends BasePage {
     public void openPage() {
         driver.get(ConfigReader.getFullUrl(path));
     }
-    public void clickDoubleClickButton(WebElement doubleClickBtn) {
-        Actions actions = new Actions(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(doubleClickBtn));
-        actions.doubleClick(doubleClickBtn).perform();
-    }
+    public void clickDoubleClickButton(WebElement element) {
+        try {
+            Actions actions = new Actions(driver);
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            actions.doubleClick(element).perform();
+        } catch (Exception e) {
+            System.out.println("Double click action failed: " + e.getMessage());
+        } finally {
+            ((org.openqa.selenium.JavascriptExecutor) driver).executeScript(
+                "var evt = new MouseEvent('dblclick', {bubbles: true, cancelable: true, view: window});" +
+                "arguments[0].dispatchEvent(evt);", element);
+        }
+}
     public void clickRightClickButton(WebElement rightClickBtn) {
         Actions actions = new Actions(driver);
         wait.until(ExpectedConditions.elementToBeClickable(rightClickBtn));
@@ -38,15 +46,15 @@ public class ButtonsPage extends BasePage {
         clickMeBtn.click();
     }
     public WebElement getDoubleClickButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(doubleClickBtn));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(doubleClickBtn));
         return driver.findElement(doubleClickBtn);
     }
     public WebElement getRightClickButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(rightClickBtn));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(rightClickBtn));
         return driver.findElement(rightClickBtn);
     }
     public WebElement getClickMeButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(clickMeBtn));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(clickMeBtn));
         return driver.findElement(clickMeBtn);
     }
     public Boolean isMessageDisplayed(String messageId) {

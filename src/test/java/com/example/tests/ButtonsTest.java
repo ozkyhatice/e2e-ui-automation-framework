@@ -10,12 +10,9 @@ public class ButtonsTest extends BaseTest {
     public void testButtons() {
         ButtonsPage buttonsPage = new ButtonsPage(driver);
         buttonsPage.openPage();
-        WebElement doubleClickBtn = driver.findElement(By.id("doubleClickBtn"));
-        WebElement rightClickBtn = driver.findElement(By.id("rightClickBtn"));
-        WebElement clickMeBtn = driver.findElement(By.xpath("//button[text()='Click Me']"));
-        buttonsPage.clickDoubleClickButton(doubleClickBtn);
-        buttonsPage.clickRightClickButton(rightClickBtn);
-        buttonsPage.clickClickMeButton(clickMeBtn);
+        buttonsPage.clickDoubleClickButton(buttonsPage.getDoubleClickButton());
+        buttonsPage.clickRightClickButton(buttonsPage.getRightClickButton());
+        buttonsPage.clickClickMeButton(buttonsPage.getClickMeButton());
         SoftAssert softAssert = new SoftAssert();
         WebElement doubleClickMessage = driver.findElement(By.id("doubleClickMessage"));
         WebElement rightClickMessage = driver.findElement(By.id("rightClickMessage"));

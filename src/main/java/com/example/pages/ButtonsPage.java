@@ -49,6 +49,11 @@ public class ButtonsPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(clickMeBtn));
         return driver.findElement(clickMeBtn);
     }
+    public Boolean isMessageDisplayed(String messageId) {
+        By messageLocator = By.id(messageId);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(messageLocator));
+        return driver.findElement(messageLocator).isDisplayed();        
+    }
     
     
 }

@@ -38,15 +38,15 @@ public class ButtonsPage extends BasePage {
         clickMeBtn.click();
     }
     public WebElement getDoubleClickButton() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(doubleClickBtn));
+        wait.until(ExpectedConditions.elementToBeClickable(doubleClickBtn));
         return driver.findElement(doubleClickBtn);
     }
     public WebElement getRightClickButton() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(rightClickBtn));
+        wait.until(ExpectedConditions.elementToBeClickable(rightClickBtn));
         return driver.findElement(rightClickBtn);
     }
     public WebElement getClickMeButton() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(clickMeBtn));
+        wait.until(ExpectedConditions.elementToBeClickable(clickMeBtn));
         return driver.findElement(clickMeBtn);
     }
     public Boolean isMessageDisplayed(String messageId) {

@@ -1,7 +1,6 @@
 package com.example.tests;
 import com.example.pages.ButtonsPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 

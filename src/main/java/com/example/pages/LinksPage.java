@@ -34,7 +34,18 @@ public class LinksPage extends BasePage {
     }
     public void clickLink(WebElement link) {
         wait.until(ExpectedConditions.elementToBeClickable(link));
-        link.click();
+        try {
+            ((org.openqa.selenium.JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block: 'center'});", link);
+            
+            Thread.sleep(500); 
+            
+            link.click();
+        } catch (Exception e) {
+            System.out.println("Click action failed: " + e.getMessage());
+            ((org.openqa.selenium.JavascriptExecutor) driver)
+                .executeScript("arguments[0].click();", link);
+        }
     }
     public void clickLinkAndSwitchToNewTab(WebElement link) {
         String originalWindow = driver.getWindowHandle();

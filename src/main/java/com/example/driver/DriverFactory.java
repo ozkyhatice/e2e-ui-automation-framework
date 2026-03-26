@@ -11,6 +11,11 @@ public class DriverFactory {
     public static void initDriver() {
         String headless = System.getProperty("headless", "false"); // Maven'dan gelen parametreyi oku
         ChromeOptions options = new ChromeOptions();
+        String downloadPath = System.getProperty("user.dir") + "/target/downloads";
+        java.util.Map<String, Object> prefs = new java.util.HashMap<>();
+        prefs.put("download.default_directory", downloadPath);
+        prefs.put("profile.default_content_settings.popups", 0);
+        options.setExperimentalOption("prefs", prefs);
         if (headless.equalsIgnoreCase("true")) {
             options.addArguments("--headless=new");
             options.addArguments("--disable-gpu");

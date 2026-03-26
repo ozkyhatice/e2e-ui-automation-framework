@@ -14,15 +14,13 @@ public class UploadDownloadTest extends BaseTest {
         String filePath = uploadDownloadPage.getAbsoulatePath("sampleFile.jpeg");
         uploadDownloadPage.uploadFile(filePath);
     }
-    @Test
-    public void testFileDownload() throws InterruptedException {
+   @Test
+    public void testFileDownload() {
         UploadDownloadPage page = new UploadDownloadPage(driver);
         page.openPage();
 
-        String homePath = System.getProperty("user.home");
-        String downloadDirPath = homePath + "/Downloads";
-        String downloadedFileName = "sampleFile.jpeg";
-        File downloadedFile = new File(downloadDirPath + "/" + downloadedFileName);
+        String downloadPath = System.getProperty("user.dir") + "/target/downloads";
+        File downloadedFile = new File(downloadPath + "/sampleFile.jpeg");
 
         if (downloadedFile.exists()) {
             downloadedFile.delete();
@@ -30,11 +28,15 @@ public class UploadDownloadTest extends BaseTest {
 
         page.clickDownloadButton();
 
-        Thread.sleep(3000); 
+        org.openqa.selenium.support.ui.FluentWait<File> wait = 
+            new org.openqa.selenium.support.ui.FluentWait<>(downloadedFile)
+                .withTimeout(java.time.Duration.ofSeconds(10))
+                .pollingEvery(java.time.Duration.ofMillis(500))
+                .ignoring(Exception.class);
 
-        Assert.assertTrue(downloadedFile.exists(), "Download failed: File does not exist in the downloads folder.");
-        
-        Assert.assertTrue(downloadedFile.length() > 0, "Download failed: File is empty (0 bytes).");
+        boolean isDownloaded = wait.until(file -> file.exists() && file.length() > 0);
+
+        Assert.assertTrue(isDownloaded, "Download failed or timed out!");
         
         downloadedFile.delete();
     }

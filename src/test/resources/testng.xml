@@ -6,6 +6,8 @@
             <class name="com.example.tests.CheckBoxTest"/>
             <class name="com.example.tests.RadioButtonTest"/>
             <class name="com.example.tests.WebTablesTest"/>
+                <class name="com.example.tests.BrokenLinksTest"/>
+            <class name="com.example.tests.UploadDownloadTest"/>
         </classes>
     </test>
 </suite>

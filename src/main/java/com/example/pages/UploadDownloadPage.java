@@ -1,0 +1,28 @@
+package com.example.pages;
+import com.example.base.BasePage;
+import org.openqa.selenium.WebDriver;
+import com.example.config.ConfigReader;
+import org.openqa.selenium.By;
+
+
+public class UploadDownloadPage extends BasePage {
+    private WebDriver driver;
+    private String path = "upload-download";
+    private By inputFile = By.id("uploadFile");
+    public UploadDownloadPage(WebDriver driver) {
+        super();
+        this.driver = super.driver;
+    }
+    public void openPage() {
+        driver.get(ConfigReader.getFullUrl(path));
+    }
+    public String getAbsoulatePath(String fileName) {
+        String userDir = System.getProperty("user.dir");
+        System.out.println("User Directory: " + userDir);
+        String filePath = userDir + "/src/test/resources/files/" + fileName;
+        return filePath;
+    }
+    public void uploadFile(String filePath) {
+        driver.findElement(inputFile).sendKeys(filePath);
+    }
+}
